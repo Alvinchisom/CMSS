@@ -1,9 +1,7 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-    	<!-- Main -->
-	<div id="main">
-	{% for post in object_list %}
+    <div id="main">
 		<!-- Post 1 -->
 		<article class="post">
 			<header>
@@ -21,9 +19,6 @@
 			</a>
 			<p>{{ post.body }}</p>
 			<footer>
-				<ul class="actions">
-					<li><a href="{% url 'article_page' post.pk %}" class="button large">Continue Reading</a></li>
-				</ul>
 				<ul class="stats">
 					<li><a href="#">General</a></li>
 					<li><a href="#" class="icon solid fa-heart">28</a></li>
@@ -31,21 +26,5 @@
 				</ul>
 			</footer>
 		</article>
-	{% endfor %}
-
-		<!-- Pagination -->
-		<ul class="actions pagination">
-			<li><a href="#" class="disabled button large previous">Previous Page</a></li>
-			<li><a href="#" class="button large next">Next Page</a></li>
-		</ul>
-
-		<section class="blurb">
-			<h2>About</h2>
-			<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">Learn More</a></li>
-			</ul>
-		</section>
-	</div>
-
+    </div>
 {% endblock %}
