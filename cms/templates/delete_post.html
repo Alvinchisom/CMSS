@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="form-group">
+        <form method="POST" class="p-4 shadow rounded bg-light">
+        {% csrf_token %}
+        <h1>Are you sure you want to delete : "{{ post.title }}" ? </h1>
+        <div class="text-center">
+            <button class="btn btn-danger px-4 py-2 rounded-pill shadow-sm "><i class="fas fa-trash-alt">Delete</i></button>
+        </div>
+    </form>
+    </div>
+</div>
+
+{% endblock %}
