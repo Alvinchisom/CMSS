@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
+{% if user.is_authenticated %}
 <div class="container">
     <div class="form-group">
         <form method="POST" class="p-4 shadow rounded bg-light">
@@ -12,5 +13,7 @@
     </form>
     </div>
 </div>
-
+{% else%}
+<h1>Log in to view page </h1>
+{% endif %}
 {% endblock %}
