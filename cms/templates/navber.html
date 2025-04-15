@@ -12,8 +12,8 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'add_post' %}">Add Post</a></li>
+                <li><a href="{% url 'add_category' %}">Add Category</a></li>
                 {% endif %}
-                <li><a href="#">Feugiat</a></li>
                 <li><a href="#">Tempus</a></li>
                 <li><a href="#">Adipiscing</a></li>
             </ul>

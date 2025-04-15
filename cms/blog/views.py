@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
-from .models import Post
+from .models import Post,Category
 from .forms import PostForm,UpdateForm
 from django.urls import reverse_lazy
 # Create your views here.
@@ -23,6 +23,10 @@ class AddPost(CreateView):
     form_class = PostForm
     template_name = 'add_post.html'
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 class UpdatePost(UpdateView):
     model = Post
     form_class = UpdateForm
@@ -33,3 +37,7 @@ class DeletePost(DeleteView):
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
 
+class AddCategory(CreateView):
+    model = Category
+    template_name = 'add_category.html'
+    fields = '__all__'
