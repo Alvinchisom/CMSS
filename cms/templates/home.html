@@ -26,8 +26,10 @@
 				</ul>
 				<ul class="stats">
 					{% if user.is_authenticated %}
-					<li><a href="{% url 'update_post' post.pk %}">Update Post</a></li>
-					<li><a href="{% url 'delete_post' post.pk %}">Delete Post</a></li>
+						{% if user.id == post.author.id %}
+							<li><a href="{% url 'update_post' post.pk %}">Update Post</a></li>
+							<li><a href="{% url 'delete_post' post.pk %}">Delete Post</a></li>
+						{% endif %}
 					{% endif %}
 					<li><a href="#" class="icon solid fa-heart">28</a></li>
 					<li><a href="#" class="icon solid fa-comment">128</a></li>
