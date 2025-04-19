@@ -7,6 +7,7 @@
             <div class="form-group">
                 <form method="POST" class="p-4 shadow rounded bg-light">
                 {% csrf_token %}
+                {{ form.media }}
                 {{ form.as_p }}
                 <div class="text-center">
                     <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm "><i class="fas fa-edit">Post</i></button>

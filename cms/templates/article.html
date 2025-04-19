@@ -17,7 +17,7 @@
 			<a href="single.html" class="image featured">
 				<a href="single.html" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
 			</a>
-			<p>{{ post.body }}</p>
+			<p>{{ post.body|safe }}</p>
 			<footer>
 				<ul class="stats">
 					{% if user.is_authenticated %}

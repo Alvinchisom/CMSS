@@ -19,7 +19,7 @@
 			<a href="single.html" class="image featured">
 				<a href="single.html" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
 			</a>
-			<p>{{ post.body }}</p>
+			<p>{{ post.body|safe|truncatechars_html:50 }}</p>
 			<footer>
 				<ul class="actions">
 					<li><a href="{% url 'article_page' post.pk %}" class="button large">Continue Reading</a></li>
