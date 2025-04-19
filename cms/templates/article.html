@@ -26,7 +26,26 @@
 							<li><a href="{% url 'delete_post' post.pk %}">Delete Post</a></li>
 						{% endif %}
 					{% endif %}
-					<li><a href="#" class="icon solid fa-heart">28</a></li>
+
+					<li>
+						{% if user.is_authenticated %}
+							<form method="POST" action="{% url 'like_Post' post.pk %}">
+								{% csrf_token %}
+								{% if liked %}
+								<button type="submit" name="likes_id" value="{{ post.id }}">
+									<i class="fa-solid fa-heart text-danger"></i>
+								</button>
+								{% else %}
+								<button type="submit" name="likes_id" value="{{ post.id }}">
+									<i class="fa-solid fa-heart text-primary"></i>
+								</button>
+								{% endif %}
+							{% else %}
+							<i class="fa-solid fa-heart text-danger"></i>
+							{% endif %}
+							{{ total_likes }}
+						</form>
+					</li>
 					<li><a href="#" class="icon solid fa-comment">128</a></li>
 				</ul>
 			</footer>
