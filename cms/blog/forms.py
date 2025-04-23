@@ -5,10 +5,10 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         # fields = ['title','body']
-        fields = ['title','category','body']
+        fields = ['title','category','image','body']
 
 class UpdateForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title','category','body']
+        fields = ['title','category','image','body']
         # fields = '__all__'

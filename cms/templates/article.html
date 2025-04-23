@@ -15,7 +15,8 @@
 				</div>
 			</header>
 			<a href="single.html" class="image featured">
-				<a href="single.html" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+				<a href="single.html" class="image featured"><img src="{{ post.image_url }}" alt="" style="width: 100%; max-width: 800px; height: 400px; object-fit: cover;
+                border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); display: block; margin: 0 auto;" /></a>
 			</a>
 			<p>{{ post.body|safe }}</p>
 			<footer>
