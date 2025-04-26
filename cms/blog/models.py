@@ -15,6 +15,24 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('home')
 
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE,null=True,blank=True)
+    profile_pic = models.ImageField(null=True,blank=True)
+    bio = RichTextField(null=True,blank=True)
+    instagram_url = models.CharField(max_length=200,null=True,blank=True)
+    facebook_url = models.CharField(max_length=200, null=True, blank=True)
+    linkedin_url = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user)
+
+    def profile_url(self):
+        if self.profile_pic:
+            return self.profile_pic.url
+        else:
+            return static('images/pexels-camcasey-1687093.jpg')
+
+
 class Post(models.Model):
     title = models.CharField(max_length=200,null=True,blank=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)

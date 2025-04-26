@@ -11,7 +11,7 @@
 				</div>
 				<div class="meta">
 					<time class="published" datetime="2015-11-01">{{ post.date }}</time>
-					<a href="#" class="author"><span class="name">{{ post.author }}</span><img src="images/avatar.jpg" alt="" /></a>
+					<a href="#" class="author"><span class="name">{{ post.author.first_name }} {{ post.author.last_name }}</span><img src="{{ post.author.profile.profile_url }}" alt="" /></a>
 				</div>
 			</header>
 			<a href="single.html" class="image featured">
@@ -52,4 +52,29 @@
 			</footer>
 		</article>
     </div>
+	<section class="container my-5">
+    <ul class="posts list-unstyled">
+        <li>
+            <article class="p-4 bg-light rounded shadow-sm d-flex align-items-center flex-column text-center">
+                <header class="mb-3">
+                    <h4 class="fw-bold">{{ post.author.profile.bio|safe }}</h4>
+                    <div class="social-icons mt-2">
+						{% if post.author.profile.instagram_url %}
+                        <a href="{{ post.author.profile.instagram_url }}" class="icon brands fa-instagram fs-4 text-danger mx-2"></a>
+						{% endif %}
+						{% if post.author.profile.facebook_url %}
+                        <a href="{{ post.author.profile.facebook_url }}" class="icon brands fa-facebook fs-4 text-primary mx-2"></a>
+						{% endif %}
+						{% if post.author.profile.linkedin_url %}
+                        <a href="{{ post.author.profile.linkedin_url }}" class="icon brands fa-linkedin fs-4 text-info mx-2"></a>
+						{% endif %}
+                    </div>
+                </header>
+                <img src="{{ post.author.profile.profile_url }}" alt="Author Image"
+                     style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+                <h5 class="mt-3 mb-0 fw-semibold">{{ post.author.first_name }} {{ post.author.last_name }}</h5>
+            </article>
+        </li>
+    </ul>
+</section>
 {% endblock %}
