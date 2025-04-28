@@ -4,6 +4,7 @@ from django.urls import reverse
 from datetime import datetime,date
 from ckeditor.fields import RichTextField
 from django.templatetags.static import static
+from django.db.models.signals import post_save
 # Create your models here.
 
 class Category(models.Model):
@@ -32,6 +33,11 @@ class Profile(models.Model):
         else:
             return static('images/pexels-camcasey-1687093.jpg')
 
+    def create_profile(sender,instance,created,**kwargs):
+        if created:
+            user_profile = Profile(user=instance)
+            user_profile.save()
+    post_save.connect(create_profile,sender=User)
 
 class Post(models.Model):
     title = models.CharField(max_length=200,null=True,blank=True)

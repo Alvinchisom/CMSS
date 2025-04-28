@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from .forms import UserProfileView
 from django.contrib.auth.views import PasswordChangeView
+from blog.models import Profile
 # Create your views here.
 
 class UserRegister(generic.CreateView):
@@ -28,3 +29,9 @@ class PasswordsView(PasswordChangeView):
 def password_success(request):
     context = {}
     return render(request,'registration/success_password.html',context)
+
+class EditProfile(generic.UpdateView):
+    model = Profile
+    template_name = 'registration/edit_profile.html'
+    fields = ['bio','profile_pic','instagram_url','facebook_url','linkedin_url']
+    success_url = reverse_lazy('home')
