@@ -63,3 +63,11 @@ class Post(models.Model):
             return self.image.url
         else:
             return static('images/pexels-camcasey-1687093.jpg')
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post,related_name='comments',on_delete=models.CASCADE,null=True,blank=True)
+    name = models.CharField(max_length=200,null=True,blank=True)
+    body = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.post.title}"

@@ -47,7 +47,20 @@
 							{{ total_likes }}
 						</form>
 					</li>
-					<li><a href="#" class="icon solid fa-comment">128</a></li>
+					<li><a href="#" class="icon solid fa-comment" onclick="toggleComments()">128</a>
+						<div id="comment-section" style="display: none;">
+							{% if not post.comments.all %}
+								No comment...
+							{% else %}
+								{% for  comment in post.comments.all %}
+									<hr>
+									<strong>{{ comment.name }}</strong>
+									<br>
+									{{ comment.body }}
+								{% endfor %}
+							{% endif %}
+						</div>
+					</li>
 				</ul>
 			</footer>
 		</article>
@@ -77,4 +90,14 @@
         </li>
     </ul>
 </section>
+<script>
+	function toggleComments() {
+		var commentsSection = document.getElementById('comment-section');
+		if (commentsSection.style.display === 'none'){
+			commentsSection.style.display = 'block';
+		}else{
+			commentsSection.style.display = 'none';
+		}
+	}
+</script>
 {% endblock %}
