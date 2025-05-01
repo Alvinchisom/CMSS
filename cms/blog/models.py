@@ -71,3 +71,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.post.title}"
+
+    class Meta:
+        ordering = ['-id']

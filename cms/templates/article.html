@@ -47,11 +47,14 @@
 							{{ total_likes }}
 						</form>
 					</li>
-					<li><a href="#" class="icon solid fa-comment" onclick="toggleComments()">128</a>
+					<li><button class="icon solid fa-comment" onclick="toggleComments()">{{ total_comments }}</button>
 						<div id="comment-section" style="display: none;">
 							{% if not post.comments.all %}
-								No comment...
+								No comment...<a href="{% url 'add_comment' post.pk %}">Leave a comment</a>
 							{% else %}
+							<br>
+							<a href="{% url 'add_comment' post.pk %}">Leave a comment</a>
+							<br>
 								{% for  comment in post.comments.all %}
 									<hr>
 									<strong>{{ comment.name }}</strong>
