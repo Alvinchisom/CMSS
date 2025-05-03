@@ -83,3 +83,9 @@ class AddComment(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('article_page',kwargs= {'pk': self.kwargs['pk']})
+
+def search(request):
+    search = request.GET.get('search','')
+    titles = Post.objects.filter(title__icontains=search)
+    context = {'object_list':titles}
+    return render(request,'search.html',context)
