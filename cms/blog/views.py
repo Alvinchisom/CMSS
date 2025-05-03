@@ -76,6 +76,9 @@ class AddComment(CreateView):
 
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
+        reply_id = self.request.POST.get('reply_id')
+        if reply_id:
+            form.instance.reply_id = reply_id
         return super().form_valid(form)
 
     def get_success_url(self):

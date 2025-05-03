@@ -50,16 +50,35 @@
 					<li><button class="icon solid fa-comment" onclick="toggleComments()">{{ total_comments }}</button>
 						<div id="comment-section" style="display: none;">
 							{% if not post.comments.all %}
+							<br>
 								No comment...<a href="{% url 'add_comment' post.pk %}">Leave a comment</a>
 							{% else %}
 							<br>
 							<a href="{% url 'add_comment' post.pk %}">Leave a comment</a>
 							<br>
 								{% for  comment in post.comments.all %}
-									<hr>
-									<strong>{{ comment.name }}</strong>
-									<br>
-									{{ comment.body }}
+									{% if not comment.reply %}
+											<hr>
+											<strong>{{ comment.name }}</strong>
+											<br>
+											{{ comment.body }}
+											{% if user == post.author %}
+											<a href="javascript:void(0)" onclick="toggleFrom('{{ comment.id }}')">Reply</a>
+											<form method="POST" action="{% url 'add_comment' post.pk %}" id="reply-form-{{ comment.id}}" style="display: none; margin-top: 10px;">
+												{% csrf_token %}
+												<input type="hidden" name="reply_id" value="{{ comment.id }}">
+												<input type="text" name="name" class="form-control my-2" value="{{ user.get_full_name }}" readonly>
+												<textarea name="body" class="form-control my-2" placeholder="Write a reply..." rows="2"></textarea>
+												<button type="submit" class="fas fa-paper-plane"></button>
+											</form>
+											{% for reply in comment.replies.all %}
+												<div style="margin-left: 30px; margin-top:10px;">
+													<strong>{{ reply.name}}</strong>
+													{{ reply.body}}
+												</div>
+											{% endfor %}
+											{% endif %}
+									{% endif %}
 								{% endfor %}
 							{% endif %}
 						</div>
@@ -101,6 +120,11 @@
 		}else{
 			commentsSection.style.display = 'none';
 		}
+	}
+
+	function toggleFrom(commentId){
+		var form = document.getElementById('reply-form-' + commentId);
+		form.style.display = form.style.display === 'none' ? 'block' : 'none';
 	}
 </script>
 {% endblock %}

@@ -68,9 +68,13 @@ class Comment(models.Model):
     post = models.ForeignKey(Post,related_name='comments',on_delete=models.CASCADE,null=True,blank=True)
     name = models.CharField(max_length=200,null=True,blank=True)
     body = models.TextField(null=True, blank=True)
+    reply = models.ForeignKey('self',related_name='replies',on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.post.title}"
 
     class Meta:
         ordering = ['-id']
+
+    def is_reply(self):
+        return self.reply is not None
